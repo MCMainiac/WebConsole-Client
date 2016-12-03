@@ -18,16 +18,23 @@ $test = "Dies ist ein Test!";
 </head>
 <body>
 <h1>WebConsole <small>by MCMainiac</small></h1>
-<pre>
-<?php
-	$client->connect();
+	<pre>
+		<?php
+			if(isset($_POST['command'])) {
+				$client->connect();
 
-	#$client->ping(array($test));
-	$client->sendCommand(new ClientCommand(ClientCommand::MC_COMMAND), array("help"));
-	#$client->sendCommand(new ClientCommand(ClientCommand::MC_COMMAND), array("stop"));
+				#$client->ping(array($test));
+				$client->sendCommand(new ClientCommand(ClientCommand::MC_COMMAND), array($_POST['command'])));
+				#$client->sendCommand(new ClientCommand(ClientCommand::MC_COMMAND), array("stop"));
 
-	$client->disconnect();
-?>
-</pre>
+				$client->disconnect();
+				echo "<div id=\"success\">Command successfully executed on client!</div>";
+			}
+		?>
+	</pre>
+	<form action="./" method="post">
+		Command: <input type="text" name="command" placeholder="enter a command to execute" /><br>
+		<input type="submit" />
+	</form>
 </body>
 </html>
