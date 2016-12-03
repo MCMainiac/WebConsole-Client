@@ -14,7 +14,7 @@ namespace WebConsole;
  * @package WebConsole
  */
 class ClientSocket {
-	const MAX_BYTES = 2048;
+	const MAX_BYTES = Packet::MAX_PACKET_SIZE;
 	const FLAGS = 0;
 
 	private $resource = null;
