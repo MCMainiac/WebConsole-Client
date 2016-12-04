@@ -6,12 +6,11 @@
  * Time: 01:41
  */
 
-namespace WebConsole;
+namespace WebConsole\commands;
 
 /**
  * Class ClientCommand
- *
- * @package WebConsole
+ * @package WebConsole\commands
  */
 class ClientCommand {
 	const UNDEFINED = -1;

@@ -6,12 +6,13 @@
  * Time: 00:55
  */
 
-namespace WebConsole;
+namespace WebConsole\packet;
+
+use WebConsole\commands\ServerResponse;
 
 /**
  * Class ServerPacket
- *
- * @package WebConsole
+ * @package WebConsole\packet
  */
 class ServerPacket extends Packet {
 	private $response;
@@ -84,7 +85,7 @@ class ServerPacket extends Packet {
 	}
 
 	/**
-	 * @return \WebConsole\ServerResponse The response included in the packet.
+	 * @return \WebConsole\commands\ServerResponse The response included in the packet.
 	 */
 	public function getResponse(): ServerResponse {
 		return $this->response;

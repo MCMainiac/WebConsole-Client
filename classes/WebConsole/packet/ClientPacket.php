@@ -6,12 +6,13 @@
  * Time: 00:55
  */
 
-namespace WebConsole;
+namespace WebConsole\packet;
+
+use WebConsole\commands\ClientCommand;
 
 /**
  * Class ClientPacket
- *
- * @package WebConsole
+ * @package WebConsole\packet
  */
 class ClientPacket extends Packet {
 	private $command;
@@ -19,9 +20,9 @@ class ClientPacket extends Packet {
 	/**
 	 * ClientPacket constructor.
 	 *
-	 * @param int                       $id        The id of the packet. Should be unique.
-	 * @param \WebConsole\ClientCommand $command   The command included in the packet.
-	 * @param array                     $arguments Optional array of strings representing the arguments.
+	 * @param int                                $id        The id of the packet. Should be unique.
+	 * @param \WebConsole\commands\ClientCommand $command   The command included in the packet.
+	 * @param array                              $arguments Optional array of strings representing the arguments.
 	 */
 	public function __construct(int $id, ClientCommand $command, array $arguments = array()) {
 		$this->id = $id;

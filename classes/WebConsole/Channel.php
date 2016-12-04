@@ -8,6 +8,13 @@
 
 namespace WebConsole;
 
+use WebConsole\commands\ClientCommand;
+use WebConsole\packet\ClientPacket;
+use WebConsole\pipeline\InputDecoder;
+use WebConsole\pipeline\OutputEncoder;
+use WebConsole\utils\Address;
+use WebConsole\utils\ClientSocket;
+
 /**
  * Class Client
  * @package WebConsole
@@ -22,7 +29,7 @@ class Channel {
 	/**
 	 * Channel constructor.
 	 *
-	 * @param \WebConsole\Address $address The address and the port of the WebConsole server.
+	 * @param \WebConsole\utils\Address $address The address and the port of the WebConsole server.
 	 */
     public function __construct(Address $address) {
 	    $this->socket = new ClientSocket($address, AF_INET, SOCK_STREAM, SOL_TCP);
@@ -66,7 +73,7 @@ class Channel {
 	 *
 	 * @param array $extra Extra arguments that will be returned from the server.
 	 *
-	 * @return bool|\WebConsole\ServerPacket Either false (if send fails) or the response packet.
+	 * @return bool|\WebConsole\packet\ServerPacket Either false (if send fails) or the response packet.
 	 */
 	public function ping(array $extra = array()) {
 		$command = new ClientCommand(ClientCommand::PING);
@@ -78,10 +85,10 @@ class Channel {
 	/**
 	 * Send a command to the server.
 	 *
-	 * @param \WebConsole\ClientCommand $command The command to send to the WebConsole server.
-	 * @param array                     $args    Optional array of string arguments.
+	 * @param \WebConsole\commands\ClientCommand $command The command to send to the WebConsole server.
+	 * @param array                              $args    Optional array of string arguments.
 	 *
-	 * @return bool|\WebConsole\ServerPacket Either false (if sending fails) or the response packet of the server.
+	 * @return bool|\WebConsole\packet\ServerPacket Either false (if sending fails) or the response packet of the server.
 	 */
 	public function sendCommand(ClientCommand $command, array $args = array()) {
     	$packet = new ClientPacket($this->packetCount++, $command, $args);

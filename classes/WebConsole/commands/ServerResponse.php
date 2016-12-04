@@ -6,12 +6,11 @@
  * Time: 01:35
  */
 
-namespace WebConsole;
+namespace WebConsole\commands;
 
 /**
  * Class ServerResponse
- *
- * @package WebConsole
+ * @package WebConsole\commands
  */
 class ServerResponse {
 	const UNDEFINED = -1;
@@ -62,7 +61,7 @@ class ServerResponse {
 	/**
 	 * @param string $response The raw response string.
 	 *
-	 * @return \WebConsole\ServerResponse The decoded response from the server.
+	 * @return \WebConsole\commands\ServerResponse The decoded response from the server.
 	 */
 	public static function fromString(string $response): ServerResponse {
 		switch (strtolower($response)) {

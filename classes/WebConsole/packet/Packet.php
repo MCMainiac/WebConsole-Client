@@ -6,11 +6,11 @@
  * Time: 00:55
  */
 
-namespace WebConsole;
+namespace WebConsole\packet;
 
 /**
  * Class Packet
- * @package WebConsole
+ * @package WebConsole\packet
  */
 abstract class Packet {
 	const ARGUMENTS_DELIMITER = " ";

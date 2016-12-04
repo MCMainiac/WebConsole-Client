@@ -6,11 +6,11 @@
  * Time: 14:53
  */
 
-namespace WebConsole;
+namespace WebConsole\utils;
 
 /**
  * Class Address
- * @package WebConsole
+ * @package WebConsole\utils
  */
 class Address {
 	private $host;
