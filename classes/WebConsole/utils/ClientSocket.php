@@ -6,12 +6,13 @@
  * Time: 15:51
  */
 
-namespace WebConsole;
+namespace WebConsole\utils;
+
+use WebConsole\packet\Packet;
 
 /**
  * Class ClientSocket
- *
- * @package WebConsole
+ * @package WebConsole\utils
  */
 class ClientSocket {
 	const MAX_BYTES = Packet::MAX_PACKET_SIZE;
@@ -23,10 +24,10 @@ class ClientSocket {
 	/**
 	 * ClientSocket constructor.
 	 *
-	 * @param \WebConsole\Address $address  The address and port to connect to.
-	 * @param int                 $domain   Specifies the protocol family to be used by the socket.
-	 * @param int                 $type     Selects the type of communication to be used by the socket.
-	 * @param int                 $protocol Sets the specific protocol within the specified domain to be used when communicating on the returned socket.
+	 * @param Address $address  The address and port to connect to.
+	 * @param int     $domain   Specifies the protocol family to be used by the socket.
+	 * @param int     $type     Selects the type of communication to be used by the socket.
+	 * @param int     $protocol Sets the specific protocol within the specified domain to be used when communicating on the returned socket.
 	 *
 	 * @throws \Exception If there is an error creating the socket.
 	 */
@@ -45,7 +46,7 @@ class ClientSocket {
 	 * @throws \Exception If there is an error connecting to the socket.
 	 */
 	public function connect(): bool {
-		$success = socket_connect(
+		$success = @socket_connect(
 			$this->resource,
 			$this->address->getHost(),
 			$this->address->getPort()
