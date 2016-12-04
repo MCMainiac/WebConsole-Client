@@ -6,12 +6,15 @@
  * Time: 00:56
  */
 
-namespace WebConsole;
+namespace WebConsole\pipeline;
+
+use WebConsole\packet\ClientPacket;
+use WebConsole\packet\Packet;
+use WebConsole\utils\ClientSocket;
 
 /**
  * Class OutputEncoder
- *
- * @package WebConsole
+ * @package WebConsole\pipeline
  */
 class OutputEncoder {
 	private $socket;
@@ -23,12 +26,13 @@ class OutputEncoder {
 	/**
 	 * Send an encoded {@link ClientPacket} over the {@link ClientSocket}.
 	 *
-	 * @param \WebConsole\ClientPacket $packet The packet to send
+	 * @param \WebConsole\packet\ClientPacket $packet The packet to send
 	 *
 	 * @return bool True if the packet has been successfully sent.
 	 */
 	public function writePacket(ClientPacket $packet): bool {
-		echo "Sending:  " . $packet;
+		# debug message
+		#echo "Sending:  " . $packet;
 
 		# gather information about the packet
 		$commandString = $packet->getCommandString();

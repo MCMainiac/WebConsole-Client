@@ -6,12 +6,14 @@
  * Time: 00:56
  */
 
-namespace WebConsole;
+namespace WebConsole\pipeline;
+
+use WebConsole\packet\ServerPacket;
+use WebConsole\utils\ClientSocket;
 
 /**
  * Class InputDecoder
- *
- * @package WebConsole
+ * @package WebConsole\pipeline
  */
 class InputDecoder {
 	private $socket;
@@ -19,7 +21,7 @@ class InputDecoder {
 	/**
 	 * InputDecoder constructor.
 	 *
-	 * @param \WebConsole\ClientSocket $socket The socket to read from.
+	 * @param \WebConsole\Utils\ClientSocket $socket The socket to read from.
 	 */
 	public function __construct(ClientSocket $socket) {
 		$this->socket = $socket;
@@ -28,7 +30,7 @@ class InputDecoder {
 	/**
 	 * Read a packet from the connected {@link ClientSocket}.
 	 *
-	 * @return bool|\WebConsole\ServerPacket Either false (if reading fails) or the decoded packet.
+	 * @return bool|\WebConsole\packet\ServerPacket Either false (if reading fails) or the decoded packet.
 	 */
 	public function readPacket() {
 		$binaryString = $this->socket->readBinaryString();
@@ -38,7 +40,8 @@ class InputDecoder {
 
 		$packet = new ServerPacket($binaryString);
 
-		echo "Received: " . $packet;
+		# debug message
+		#echo "Received: " . $packet;
 
 		return $packet;
 	}
