@@ -24,7 +24,7 @@ $test = "Dies ist ein Test!";
 				$client->connect();
 
 				#$client->ping(array($test));
-				$client->sendCommand(new ClientCommand(ClientCommand::MC_COMMAND), array($_POST['command'])));
+				$client->sendCommand(new ClientCommand(ClientCommand::MC_COMMAND), array($_POST['command']));
 				#$client->sendCommand(new ClientCommand(ClientCommand::MC_COMMAND), array("stop"));
 
 				$client->disconnect();
