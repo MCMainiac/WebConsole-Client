@@ -32,7 +32,7 @@ class Channel {
 	 * @param \WebConsole\utils\Address $address The address and the port of the WebConsole server.
 	 */
     public function __construct(Address $address) {
-	    $this->socket = new ClientSocket($address, AF_INET, SOCK_STREAM, SOL_TCP);
+	    $this->socket = new ClientSocket($address);
 	    $this->inputReader = new InputDecoder($this->socket);
 	    $this->outputPrinter = new OutputEncoder($this->socket);
     }

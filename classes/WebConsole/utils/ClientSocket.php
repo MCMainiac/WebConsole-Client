@@ -8,6 +8,7 @@
 
 namespace WebConsole\utils;
 
+use WebConsole\commands\ClientCommand;
 use WebConsole\packet\Packet;
 
 /**
@@ -18,6 +19,10 @@ class ClientSocket {
 	const MAX_BYTES = Packet::MAX_PACKET_SIZE;
 	const FLAGS = 0;
 
+	const DOMAIN = AF_INET;
+	const TYPE = SOCK_STREAM;
+	const PROTOCOL = SOL_TCP;
+
 	private $resource = null;
 	private $address = null;
 
@@ -25,15 +30,12 @@ class ClientSocket {
 	 * ClientSocket constructor.
 	 *
 	 * @param Address $address  The address and port to connect to.
-	 * @param int     $domain   Specifies the protocol family to be used by the socket.
-	 * @param int     $type     Selects the type of communication to be used by the socket.
-	 * @param int     $protocol Sets the specific protocol within the specified domain to be used when communicating on the returned socket.
 	 *
 	 * @throws \Exception If there is an error creating the socket.
 	 */
-	public function __construct(Address $address, int $domain, int $type, int $protocol) {
+	public function __construct(Address $address) {
 		$this->address = $address;
-		$this->resource = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+		$this->resource = socket_create(ClientSocket::DOMAIN, ClientSocket::TYPE, ClientSocket::PROTOCOL);
 
 		if ($this->resource === false)
 			throw new \Exception(socket_strerror(socket_last_error()));
@@ -51,6 +53,9 @@ class ClientSocket {
 			$this->address->getHost(),
 			$this->address->getPort()
 		);
+
+		socket_setopt($this->resource, SOL_SOCKET, SO_KEEPALIVE, true);
+		socket_setopt($this->resource, SOL_SOCKET, TCP_NODELAY, true);
 
 		if ($success === false)
 			throw new \Exception(socket_strerror(socket_last_error()));

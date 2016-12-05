@@ -41,3 +41,19 @@ function decodeUrlParam(string $key, $default = null) {
 
 	return urldecode($value);
 }
+
+/**
+ * This will execute $cmd in the background (no cmd window) without PHP waiting for it to finish, on both Windows and
+ * Unix.
+ *
+ * @author Arno van den Brink
+ *
+ * @param string $cmd The command to be executed
+ */
+function execInBackground(string $cmd) {
+	if (substr(php_uname(), 0, 7) == "Windows"){
+		pclose(popen("start /B ". $cmd, "r"));
+	} else {
+		exec($cmd . " > /dev/null &");
+	}
+}
