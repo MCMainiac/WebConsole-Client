@@ -25,12 +25,15 @@ class Channel {
 	 * @param \WebConsole\Address $address The address and the port of the WebConsole server.
 	 */
     public function __construct(Address $address) {
-		error_reporting(0); // for the check (more nice that way :D)
-		if(AF_INET == "AF_INET") { // check for php_sockets. AF_INET with php_sockets equals to an int and without php_sockets it equals to "AF_INET"
-			die("<h1>You need to enable php_sockets in php.ini (on line 896)</h1><h3>To do that you need to enter into the php directory and modify <code>php.ini</code> (you might also need to restart apache).</h3>");
+		error_reporting(0);
+		if(AF_INET == "AF_INET") {
+			echo("<h1>You need to enable php_sockets in php.ini (on line 896)</h1>\n");
+			echo("<h3>To do that you need to enter into the php directory");
+			die("and modify <code>php.ini</code> (you might also need to restart apache).</h3>");
 		}
-		error_reporting(E_ALL); // back to normal
-		$this->socket = new ClientSocket($address, AF_INET, SOCK_STREAM, SOL_TCP); // this shouldn't bug anymore :D
+		error_reporting(E_ALL);
+		
+		$this->socket = new ClientSocket($address, AF_INET, SOCK_STREAM, SOL_TCP);
 		$this->inputReader = new InputDecoder($this->socket);
 		$this->outputPrinter = new OutputEncoder($this->socket);
     }
