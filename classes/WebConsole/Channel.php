@@ -24,11 +24,16 @@ class Channel {
 	 *
 	 * @param \WebConsole\Address $address The address and the port of the WebConsole server.
 	 */
-    public function __construct(Address $address) {
-	    $this->socket = new ClientSocket($address, AF_INET, SOCK_STREAM, SOL_TCP);
-	    $this->inputReader = new InputDecoder($this->socket);
-	    $this->outputPrinter = new OutputEncoder($this->socket);
-    }
+	public function __construct(Address $address) {
+		if (!defined(AF_INET)) {
+			// tell the user to enable the php_socket extension and end script execution
+			trigger_error("You need to enable the php_sockets extension!", E_USER_ERROR);
+		}
+		
+		$this->socket = new ClientSocket($address, AF_INET, SOCK_STREAM, SOL_TCP);
+		$this->inputReader = new InputDecoder($this->socket);
+		$this->outputPrinter = new OutputEncoder($this->socket);
+	}
 
 	/**
 	 * Connect to the WebConsole server.
