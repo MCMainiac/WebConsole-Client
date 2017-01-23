@@ -1,14 +1,15 @@
 # WebConsole Client by MCMainiac
 This is the PHP client of WebConsole.
+
 [Bukkit Link](https://dev.bukkit.org/bukkit-plugins/webconsole/)
 
-## Getting Started:
-___
-follow the steps below to successfully setup the WebConsoleClient:
-### enabling php_sockets
-firstly, you need to enable a php extendsion called php_sockets.
-> Sometimes php_sockets is already enabled but if it isn't, WebConsole will inform you
+# Installation
+## Enabling the `php_sockets` extension
+Since WebConsole uses TCP sockets to communicate with the server, you might need to enable a php extension called `php_sockets`.
 
-open `php.ini` and go to line 896 end remove the `;` from the beginning.
+> Sometimes `php_sockets` is already enabled by default. If it is not, WebConsole will inform you.
 
-after that step you may need to restart Apache
+To enable the `php_sockets` extension:
+- open your `php.ini` and go to line 896
+- remove the `;` from the beginning of the line to uncomment it
+- after you have saved your config, you need to restart your server in order for php to load the extension.
