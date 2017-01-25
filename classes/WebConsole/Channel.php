@@ -25,7 +25,7 @@ class Channel {
 	 * @param \WebConsole\Address $address The address and the port of the WebConsole server.
 	 */
 	public function __construct(Address $address) {
-		if (!defined(AF_INET)) {
+		if (AF_INET == "AF_INIT") {
 			// tell the user to enable the php_socket extension and end script execution
 			trigger_error("You need to enable the php_sockets extension!", E_USER_ERROR);
 		}
