@@ -16,9 +16,7 @@ $client = new Channel($address);
 <body>
 <h1>WebConsole <small>by MCMainiac</small></h1>
 	<pre><?php
-
-        echo PHP_EOL;
-
+        // IDEA: only connect if user wants to do an action (action=mc command|ping)
         try {
 	        $client->connect();
 
