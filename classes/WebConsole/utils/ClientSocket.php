@@ -1,14 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Ricardo
- * Date: 25.11.2016
- * Time: 15:51
- */
 
 namespace WebConsole\utils;
 
-use WebConsole\commands\ClientCommand;
 use WebConsole\packet\Packet;
 
 /**
@@ -48,14 +41,19 @@ class ClientSocket {
 	 * @throws \Exception If there is an error connecting to the socket.
 	 */
 	public function connect(): bool {
+		// only for debugging
+		socket_setopt($this->resource, SOL_SOCKET, SO_DEBUG, 1);
+
+		socket_setopt($this->resource, SOL_SOCKET, TCP_NODELAY, 1);
+		socket_setopt($this->resource, SOL_SOCKET, SO_KEEPALIVE, 1);
+		socket_setopt($this->resource, SOL_SOCKET, SO_REUSEADDR, 1);
+		socket_setopt($this->resource, SOL_SOCKET, SO_REUSEPORT, 1);
+
 		$success = @socket_connect(
 			$this->resource,
 			$this->address->getHost(),
 			$this->address->getPort()
 		);
-
-		socket_setopt($this->resource, SOL_SOCKET, SO_KEEPALIVE, true);
-		socket_setopt($this->resource, SOL_SOCKET, TCP_NODELAY, true);
 
 		if ($success === false)
 			throw new \Exception(socket_strerror(socket_last_error()));
