@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Ricardo
- * Date: 23.11.2016
- * Time: 14:53
- */
 
 namespace WebConsole\utils;
 

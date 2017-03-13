@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Ricardo
- * Date: 24.11.2016
- * Time: 00:56
- */
 
 namespace WebConsole\pipeline;
 

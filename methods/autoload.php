@@ -1,10 +1,4 @@
 <?php if (defined("AUTOLOADED") && AUTOLOADED) return;
-/**
- * Created by PhpStorm.
- * User: Ricardo
- * Date: 23.11.2016
- * Time: 15:37
- */
 
 # Define constants
 define("AUTOLOADED", true);
