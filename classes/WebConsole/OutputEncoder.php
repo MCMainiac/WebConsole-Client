@@ -31,18 +31,18 @@ class OutputEncoder {
 		echo "Sending:  " . $packet;
 
 		# gather information about the packet
-		$commandString = $packet->getCommandString();
+		$commandString = trim($packet->getCommandString());
 		$commandStringLength = strlen($commandString);
-		$argumentsString = implode(Packet::ARGUMENTS_DELIMITER, $packet->getArguments());
+		$argumentsString = trim(implode(Packet::ARGUMENTS_DELIMITER, $packet->getArguments()));
 		$argumentsStringLength = strlen($argumentsString);
 
 		# pack the information into a binary string
 		$binaryPacket  = $this->pack_int32be($packet->getId());
 		$binaryPacket .= $this->pack_int32be($commandStringLength);
 		$binaryPacket .= $this->pack_int32be($argumentsStringLength);
-		$binaryPacket .= trim($commandString);
+		$binaryPacket .= $commandString;
 		if ($argumentsStringLength > 0)
-			$binaryPacket .= trim($argumentsString);
+			$binaryPacket .= $argumentsString;
 		$binaryPacket .= Packet::getPacketEnd();
 
 		# send the binary string over the socket connection
