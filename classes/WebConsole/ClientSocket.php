@@ -73,7 +73,7 @@ class ClientSocket {
 			ClientSocket::FLAGS
 		);
 
-		$success = $bytesSent !== false && $bytesSent = $bytes;
+		$success = $bytesSent !== false && $bytesSent == $bytes;
 
 		return $success;
 	}
